@@ -32,6 +32,9 @@ Things you may want to cover:
 | nickname | string | null: false |
 | email    | string | null: false |
 | password | string | null: false |
+| username | string | null: false |
+| kana     | string | null: false |
+| birthday | string | null: false |
 
 ### Association
 
@@ -44,8 +47,10 @@ Things you may want to cover:
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | item_name | string     | null: false                    |
-| image     | string     | null: false, foreign_key: true |
-| text      | string     | null: false, foreign_key: true |
+| image     | string     | null: false                    |
+| text      | string     | null: false                    |
+| category  | string     | null: false                    |
+| condition | string     | null: false                    |
 | user_id   | references | null: false, foreign_key: true |
 
 ### Association
@@ -57,7 +62,6 @@ Things you may want to cover:
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| text    | string     | null: false                    |
 | user_id | references | null: false, foreign_key: true |
 | item_id | references | null: false, foreign_key: true |
 
@@ -71,7 +75,9 @@ Things you may want to cover:
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| text        | string     | null: false                    |
+| option      | string     | null: false                    |
+| adress      | string     | null: false                    |
+| days        | string     | null: false                    |
 | purchase_id | references | null: false, foreign_key: true |
 | user_id     | references | null: false, foreign_key: true |
 
