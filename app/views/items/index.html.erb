@@ -131,7 +131,7 @@
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
-          <%= image_tag "item-sample.png", class: "item-img" %>
+          <%= item.text %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
@@ -147,7 +147,7 @@
           <div class='item-price'>
             <span><%= item.price %>円<br>(税込み)</span>
             <div class='star-btn'>
-              <%= item.text %>
+              <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>
                 <%= item.condition %>
               </span>
