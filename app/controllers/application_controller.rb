@@ -11,11 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:nickname])
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:familyname])
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:firstname])
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:kana_familiyname])
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:kana_firstnamename])
-    devise_parameter_sanitixer.permit(:sign_up, keys: [:birthday])
+    devise_parameter_sanitixer.permit(:sign_up, keys: [:nickname,:familyname,:firstname,:kana_familiyname,:kana_firstnamename,:birthday,])
   end
 end
