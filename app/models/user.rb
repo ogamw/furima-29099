@@ -10,5 +10,5 @@ class User < ApplicationRecord
             format: { with:/^[ぁ-んァ-ン一-龥]/, message: "is must NOT contain any other characters than alphanumerics." }
   validates :kana_familiyname, :kana_firstnamename, presence: true
             #全角カタカナ
-            format: { with:/^[ァ-ン]/, message: "is must NOT contain any other characters than alphanumerics." }
+            format: { with:/^([ァ-ン]|ー)+$/, message: "is must NOT contain any other characters than alphanumerics." }
 end
