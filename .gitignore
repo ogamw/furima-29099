@@ -29,3 +29,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+#gitignoreを使って.DS_Storeをgitから外す
+/app/assets/images
+.DS_Store
