@@ -5,10 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :nickname,  :birthday, presence: true
-  validates :familyname, :firstname, presence: true
-            #全角ひらがなカタカナ漢字
-            format: {  with: /\A[ぁ-んァ-ン一-龥]/, message: "is must NOT contain any other characters than alphanumerics." }
-  validates :kana_familiyname, :kana_firstnamename, presence: true
-            #全角カタカナ
-            format: {  with: /\A([ァ-ン]|ー)+$/, message: "is must NOT contain any other characters than alphanumerics." }
+  validates :familyname, :firstname, presence: true,
+            #全角ひらがなカタカナ漢字のみ可
+            format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is must NOT contain any other characters than alphanumerics." }
+  validates :kana_familiyname, :kana_firstnamename, presence: true,
+            #全角カナのみ可
+            format: { with: /\A([ァ-ン]|ー)+\z/, message: "is must NOT contain any other characters than alphanumerics." }
 end
