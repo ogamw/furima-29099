@@ -6,8 +6,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :nickname,           null: false
       t.string :familyname,         null: false
       t.string :firstname,          null: false
-      t.string :kana_familiyname,   null: false
-      t.string :kana_firstnamename, null: false
+      t.string :kana_familyname,    null: false
+      t.string :kana_firstname,     null: false
       t.date   :birthday,           null: false
       ## Database authenticatable
       t.string :email,              null: false, default: ""

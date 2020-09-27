@@ -34,7 +34,7 @@ Things you may want to cover:
 | password         | string | null: false |
 | familyname       | string | null: false |
 | firstname        | string | null: false |
-| kana_familiyname | string | null: false |
+| kana_familyname  | string | null: false |
 | kana_firstname   | string | null: false |
 | birthday         | date   | null: false |
 
