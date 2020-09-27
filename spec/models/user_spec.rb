@@ -79,13 +79,19 @@ RSpec.describe User, type: :model do
         it"kana_familynameが空では登録できない"do
           @user.kana_familyname = nil
           @user.valid?
-          expect(@user.errors.full_messages).to include("Kana_familyname can't be blank")
+          expect(@user.errors.full_messages).to include("Kana familyname can't be blank")
+        end
+
+        it"kana_familynameに全角カタカナ以外があれば登録できない"do
+        @user.kana_familyname = "aaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ("Kana familyname is must NOT contain any other characters than alphanumerics.")
         end
 
         it"kana_firstnamenameが空では登録できない"do
           @user.kana_firstname = nil
           @user.valid?
-          expect(@user.errors.full_messages).to include("Kana_firstname can't be blank")
+          expect(@user.errors.full_messages).to include("Kana firstname can't be blank")
         end
 
         it"birthdayが空では登録できない"do
