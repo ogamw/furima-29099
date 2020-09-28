@@ -110,7 +110,7 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include 'Kana familyname is must NOT contain any other characters than full-width characters (katakana).'
         end
 
-        it 'kana_firstnamenameが空では登録できない' do
+        it 'kana_firstnameが空では登録できない' do
           @user.kana_firstname = nil
           @user.valid?
           expect(@user.errors.full_messages).to include("Kana firstname can't be blank")
