@@ -34,7 +34,7 @@ Things you may want to cover:
 | password         | string | null: false |
 | familyname       | string | null: false |
 | firstname        | string | null: false |
-| kana_familiyname | string | null: false |
+| kana_familyname  | string | null: false |
 | kana_firstname   | string | null: false |
 | birthday         | date   | null: false |
 
@@ -49,7 +49,7 @@ Things you may want to cover:
 | --------------- | ---------- | ------------------------------ |
 | item_name       | string     | null: false                    |
 | text            | text       | null: false                    |
-| price           | string     | null: false                    |
+| price           | integer    | null: false                    |
 | category_id     | integer    | null: false                    |
 | condition_id    | integer    | null: false                    |
 | postage_id      | integer    | null: false                    |
