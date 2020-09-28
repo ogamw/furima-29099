@@ -3,6 +3,10 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at ASC')
   end
 
+  def new
+    @items = Item.new
+  end
+
   private
 
   def items_params
