@@ -20,4 +20,5 @@ class User < ApplicationRecord
        validates :password,
                             # 半角英数字混合のみ可
                             format: { with: VALID_PASSWORD_REGEX, message: 'is must contain both letters and numbers.' }
+  end
 end
