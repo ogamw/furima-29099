@@ -69,9 +69,9 @@ RSpec.describe Item, type: :model do
         end
 
         it 'priceが半角数字以外があれば登録できない' do
-          @items.price = nil
+          @items.price = "aaaaa"
           @items.valid?
-          expect(@items.errors.full_messages).to include('Price out of setting range.')
+          expect(@items.errors.full_messages).to include('Price is not a number')
         end
 
         it 'userが紐付いていないと保存できないこと' do

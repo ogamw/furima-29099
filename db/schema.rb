@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_115138) do
     t.string "kana_familyname", null: false
     t.string "kana_firstname", null: false
     t.date "birthday", null: false
+    t.bigint "items_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -61,8 +62,10 @@ ActiveRecord::Schema.define(version: 2020_09_28_115138) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["items_id"], name: "index_users_on_items_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "users", "items", column: "items_id"
 end

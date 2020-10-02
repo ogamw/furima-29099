@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_area
   belongs_to_active_hash :days_to_ship
   has_one_attached :image
+  belongs_to :user
 
   with_options presence: true do
     validates :image, :item_name, :text, :category, :condition, :postage, :shipping_area, :days_to_ship, :price
@@ -13,4 +14,5 @@ class Item < ApplicationRecord
   with_options numericality: { other_than: 1 ,message: 'Select'} do
     validates :category_id,:condition_id,:postage_id,:shipping_area_id,:days_to_ship_id
   end
+    validates :price, numericality: true
 end
