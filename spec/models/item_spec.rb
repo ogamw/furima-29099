@@ -34,32 +34,32 @@ RSpec.describe Item, type: :model do
         it 'category_idが1では登録できない' do
           @items.category_id = '1'
           @items.valid?
-          expect(@items.errors.full_messages).to include("Category_id Select")
+          expect(@items.errors.full_messages).to include("Category Select")
         end
 
         it 'condition_idが1では登録できない' do
           @items.condition_id = '1'
           @items.valid?
-          expect(@items.errors.full_messages).to include("Condition_id Select")
+          expect(@items.errors.full_messages).to include("Condition Select")
         end
 
         it 'postage_idが1では登録できない' do
           @items.postage_id = '1'
           @items.valid?
-          expect(@items.errors.full_messages).to include("Postage_id Select")
+          expect(@items.errors.full_messages).to include("Postage Select")
         end
 
 
         it 'shipping_area_idが1では登録できない' do
           @items.shipping_area_id = '1'
           @items.valid?
-          expect(@items.errors.full_messages).to include("Shipping_area_id Select")
+          expect(@items.errors.full_messages).to include("Shipping area Select")
         end
 
         it 'days_to_ship_idが1では登録できない' do
           @items.days_to_ship_id = '1'
           @items.valid?
-          expect(@items.errors.full_messages).to include("Days_to_ship_id Select")
+          expect(@items.errors.full_messages).to include("Days to ship Select")
         end
 
         it 'priceが空では登録できない' do
