@@ -14,5 +14,5 @@ class Item < ApplicationRecord
   with_options numericality: { other_than: 1 ,message: 'Select'} do
     validates :category_id,:condition_id,:postage_id,:shipping_area_id,:days_to_ship_id
   end
-    validates :price, numericality: true
+    validates :price, numericality: { greater_than: 299 ,less_than: 10000000,message: 'Out of setting range'}
 end
