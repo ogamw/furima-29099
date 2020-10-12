@@ -34,32 +34,31 @@ RSpec.describe Item, type: :model do
         it 'category_idが1では登録できない' do
           @item.category_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Category Select")
+          expect(@item.errors.full_messages).to include('Category Select')
         end
 
         it 'condition_idが1では登録できない' do
           @item.condition_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Condition Select")
+          expect(@item.errors.full_messages).to include('Condition Select')
         end
 
         it 'postage_idが1では登録できない' do
           @item.postage_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Postage Select")
+          expect(@item.errors.full_messages).to include('Postage Select')
         end
-
 
         it 'shipping_area_idが1では登録できない' do
           @item.shipping_area_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Shipping area Select")
+          expect(@item.errors.full_messages).to include('Shipping area Select')
         end
 
         it 'days_to_ship_idが1では登録できない' do
           @item.days_to_ship_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Days to ship Select")
+          expect(@item.errors.full_messages).to include('Days to ship Select')
         end
 
         it 'priceが空では登録できない' do
@@ -69,7 +68,7 @@ RSpec.describe Item, type: :model do
         end
 
         it 'priceが半角数字以外があれば登録できない' do
-          @item.price = "aaaaa"
+          @item.price = 'aaaaa'
           @item.valid?
           expect(@item.errors.full_messages).to include('Price Out of setting range')
         end
@@ -81,7 +80,7 @@ RSpec.describe Item, type: :model do
         end
 
         it 'priceが10,000,000以上だと出品登録できない' do
-          @item.price = 10000000
+          @item.price = 10_000_000
           @item.valid?
           expect(@item.errors.full_messages).to include('Price Out of setting range')
         end
@@ -89,7 +88,7 @@ RSpec.describe Item, type: :model do
         it 'userが紐付いていないと保存できないこと' do
           @item.user = nil
           @item.valid?
-          expect(@item.errors.full_messages).to include("User must exist")
+          expect(@item.errors.full_messages).to include('User must exist')
         end
       end
     end
