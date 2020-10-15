@@ -130,9 +130,11 @@
       <li class='list'>
         <% if @items != nil %>
           <% @items.each do |item| %>
-            <%= link_to "#" do %>
+            <%#= link_to '/items/#{item.id}', method: :get do %>
+            <%= link_to '詳細', item_path(item.id), method: :get %>
+            <%#= link_to '詳細', item.all(item.id), method: :get, class: "show-item" %>
               <div class='item-img-content'>
-                <%= item.text %>
+                <%= image_tag item.image.variant(resize: '250x250') %>
                 <%# 商品が売れていればsold outを表示しましょう %>
                 <div class='sold-out'>
                   <span>Sold Out!!</span>
@@ -153,7 +155,7 @@
                   </div>
                 </div>
               </div>
-            <% end %>
+            <%# end %>
           <% end %>
         <% end %>
       </li>
@@ -163,7 +165,9 @@
       <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
         <% if @items == nil %>
-          <%= link_to '#' do %>
+          <%#= link_to '/items/#{item.id}', method: :get do %>
+          <%= link_to '詳細', item_path(item.id), method: :get %>
+          <%#= link_to '詳細', item.all(item.id), method: :get, class: "show-item" %>
             <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
             <div class='item-info'>
               <h3 class='item-name'>
@@ -177,7 +181,7 @@
                 </div>
               </div>
             </div>
-          <% end %>
+          <%# end %>
         <% end %>
       </li>
       <%# //商品がある場合は表示されないようにしましょう %>
