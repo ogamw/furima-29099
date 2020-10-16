@@ -7,7 +7,6 @@
       <%= @items.item_name %>
     </h2>
     <div class='item-img-content'>
-      <%#= image_tag "item-sample.png" ,class:"item-box-img" %>
       <%= image_tag @items.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class='sold-out'>
@@ -24,7 +23,7 @@
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
       
-    <% if user_signed_in? && current_user.id == tweet.user_id %>
+    <% if user_signed_in? && current_user.id == @items.user_id %>
       <%= link_to '商品の編集', "#", method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
