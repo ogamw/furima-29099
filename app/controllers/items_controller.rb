@@ -6,12 +6,12 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @items = Item.new
+    @item = Item.new
   end
 
   def create
-    @items = Item.new(items_params)
-    if @items.save
+    @item = Item.new(items_params)
+    if @item.save
       redirect_to root_path
     else
       render :new
@@ -27,20 +27,29 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    item.update(items_params)
-  end
-
-  def show
+    if @item.update(items_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
 
   def items_params
-    params.require(:item).permit(:item_name, :image, :text, :category_id, :condition_id, :postage_id, :shipping_area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(
+      :item_name,
+      :image,
+      :text,
+      :category_id,
+      :condition_id,
+      :postage_id,
+      :shipping_area_id,
+      :days_to_ship_id,
+      :price
+    )
+    .merge(user_id: current_user.id)
   end
 
   def set_item
