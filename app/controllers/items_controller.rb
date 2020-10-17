@@ -27,24 +27,29 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    if item.update(items_params)
+    if @item.update(items_params)
       redirect_to root_path
     else
       render :edit
     end
   end
 
-  def show
-  end
-
   private
 
   def items_params
-    params.require(:item).permit(:item_name, :image, :text, :category_id, :condition_id, :postage_id, :shipping_area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(
+      :item_name,
+      :image,
+      :text,
+      :category_id,
+      :condition_id,
+      :postage_id,
+      :shipping_area_id,
+      :days_to_ship_id,
+      :price
+    )
+    .merge(user_id: current_user.id)
   end
 
   def set_item
