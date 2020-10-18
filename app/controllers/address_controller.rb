@@ -18,7 +18,7 @@ class AddressController < ApplicationController
   def items_params
     params.require(:address).permit(
       :postal_code,
-      :prefectures_id,
+      :prefecture_id,
       :municipality,
       :address,
       :building_name,
