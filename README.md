@@ -82,7 +82,7 @@ Things you may want to cover:
 | postal_code     | string     | null: false                    |
 | prefectures_id  | integer    | null: false                    |
 | municipality    | string     | null: false                    |
-| adress          | string     | null: false                    |
+| address         | string     | null: false                    |
 | building_name   | string     |                                |
 | phone           | string     | null: false                    |
 | order_id        | references | null: false, foreign_key: true |
