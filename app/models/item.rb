@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :days_to_ship
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   with_options presence: true do
     validates :image, :item_name, :text, :category, :condition, :postage, :shipping_area, :days_to_ship, :price

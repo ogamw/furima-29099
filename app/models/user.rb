@@ -7,6 +7,7 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
 
   has_many :items
+  has_one :order
 
   with_options presence: true do
     validates :nickname, :birthday

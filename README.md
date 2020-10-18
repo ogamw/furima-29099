@@ -59,10 +59,10 @@ Things you may want to cover:
 
 ### Association
 
-- has_one :purchase
+- has_one :orders
 - belongs_to :user
 
-## purchase テーブル
+## orders テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
@@ -85,8 +85,8 @@ Things you may want to cover:
 | adress          | string     | null: false                    |
 | building_name   | string     |                                |
 | phone           | string     | null: false                    |
-| purchase_id     | references | null: false, foreign_key: true |
+| order_id        | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase
+- belongs_to :order
