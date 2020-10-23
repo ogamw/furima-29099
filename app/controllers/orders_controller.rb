@@ -1,13 +1,14 @@
 class OrdersController < ApplicationController
   def index
-    @order = Order.new
+    @order = Transactions.new
     @item = Item.find(params[:item_id])
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Transaction.new(order_params)
     @item = Item.find(params[:item_id])
     if @order.valid?
+      pay_item
       @order.save
       return redirect_to root_path
     else
@@ -18,7 +19,29 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    #params.require(:order).permit(:price).merge(user_id: current_user.id)
-    params.permit(:price).merge(user_id: current_user.id)
+    params.permit(
+      :price,
+      :token,
+      :number,
+      :exp_month,
+      :exp_year,
+      :cvc,
+      :postal_code,
+      :prefecture,
+      :municipality,
+      :address,
+      :building_name,
+      :phone
+    )
+    .merge(token: params[:token], user_id: current_user.id)
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp::Charge.create(
+      amount: params[:price],  # 商品の値段
+      card: params[:token],    # カードトークン
+      currency: 'jpy'          # 通貨の種類（日本円）
+    )
   end
 end

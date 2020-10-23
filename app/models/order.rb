@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  validates :price, presence: true
+  attr_accessor :token
   belongs_to :user
   belongs_to :item
   has_one :address
