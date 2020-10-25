@@ -8,13 +8,14 @@ class AddressController < ApplicationController
     @address = Address.new(address_params)
     if @address.valid?
       @address.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
   end
 
   private
+
   def address_params
     params.require(:address).permit(
       :postal_code,
@@ -24,6 +25,6 @@ class AddressController < ApplicationController
       :building_name,
       :phone
     )
-    .merge(user_id: current_user.id)
+          .merge(user_id: current_user.id)
   end
 end

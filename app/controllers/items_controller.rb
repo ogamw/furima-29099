@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
       :days_to_ship_id,
       :price
     )
-    .merge(user_id: current_user.id)
+          .merge(user_id: current_user.id)
   end
 
   def set_item
