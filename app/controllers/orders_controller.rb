@@ -1,16 +1,21 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_item, only: [:new, :create]
+  before_action :set_item
   def index
-    @order = Transaction.new
+    if @item.purchaser_id.nil?
+      @order = Transaction.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
     @order = Transaction.new(order_params)
-    if current_user.id != @item.user_id
-      @order.valid?
+    if (current_user.id != @item.user_id) && @order.valid?
       pay_item
       @order.save
+      @item.purchaser_id = current_user.id
+      @item.save
       redirect_to root_path
     else
       render 'index'
@@ -49,5 +54,4 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-
 end

@@ -9,9 +9,12 @@
     <div class='item-img-content'>
       <%= image_tag @item.image,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <div class='sold-out'>
-        <span>Sold Out!!</span>
-      </div>
+      <% if @item.purchaser_id.nil? %>
+      <% else %>
+        <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
@@ -31,7 +34,6 @@
 
     <%# 商品が売れていない場合はこちらを表示しましょう %>
     <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get ,class:"item-red-btn"%>
-    <%#= link_to '購入画面に進む', '/items/#{item.id}/orders', method: :get ,class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
 
 
