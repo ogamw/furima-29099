@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   def index
     @order = Transaction.new
     @item = Item.find(params[:item_id])
@@ -7,7 +8,8 @@ class OrdersController < ApplicationController
   def create
     @order = Transaction.new(order_params)
     @item = Item.find(params[:item_id])
-    if @order.valid?
+    if current_user.id != @item.user_id
+      @order.valid?
       pay_item
       @order.save
       redirect_to root_path

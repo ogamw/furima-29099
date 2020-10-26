@@ -7,6 +7,7 @@ class Transaction
                 :address,
                 :building_name,
                 :phone,
+                :order_id,
                 :item_id,
                 :user_id
 
@@ -23,9 +24,11 @@ class Transaction
               format: { with: /\A[0-9]{10,11}\z/, message: 'は「-」を入力しないでください'}
   end
 
+  validates :item_id, uniqueness: true
+
   def save
     # カードの情報を保存
-    Order.create(item_id: item_id, user_id: user_id)
+    Order.create(order_id: order_id, item_id: item_id, user_id: user_id)
     # 住所の情報を保存
     Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name)
   end
