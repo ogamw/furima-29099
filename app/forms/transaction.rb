@@ -28,6 +28,6 @@ class Transaction
     # カードの情報を保存
     Order.create(id: order_id, item_id: item_id, user_id: user_id)
     # 住所の情報を保存
-    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name)
+    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, order_id: order_id)
   end
 end

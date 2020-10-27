@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item
   def index
-    if @item.purchaser_id.nil?
+    if (current_user.id != @item.user_id) && @item.purchaser_id.nil?
       @order = Transaction.new
     else
       redirect_to root_path
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Transaction.new(order_params)
-    if (current_user.id != @item.user_id) && @order.valid?
+    if @order.valid?
       pay_item
       @order.save
       @item.purchaser_id = current_user.id
