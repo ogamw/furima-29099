@@ -25,8 +25,8 @@ class Transaction
 
   def save
     # カードの情報を保存
-    order = Order.create( item_id: item_id, user_id: user_id)
+    order = Order.create(item_id: item_id, user_id: user_id)
     # 住所の情報を保存
-    Address.create( postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone: phone, order_id: order.id)
+    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone: phone, order_id: order.id)
   end
 end

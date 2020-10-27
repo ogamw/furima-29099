@@ -10,7 +10,7 @@ FactoryBot.define do
     password_confirmation { password }
     familyname            { person.last.kanji }
     firstname             { person.first.kanji }
-    kana_familyname       {person.last.katakana}
+    kana_familyname       { person.last.katakana}
     kana_firstname        {person.first.katakana}
     birthday              {Faker::Date.birthday}
   end
