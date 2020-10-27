@@ -3,19 +3,20 @@ class OrdersController < ApplicationController
   before_action :set_item
   def index
     if (current_user.id != @item.user_id) && @item.purchaser_id.nil?
-      @order = Transaction.new
+      @transaction = Transaction.new
     else
       redirect_to root_path
     end
   end
 
   def create
-    @order = Transaction.new(order_params)
-    if @order.valid?
+    @transaction = Transaction.new(order_params)
+    if @transaction.valid?
       pay_item
-      @order.save
+      @transaction.save
       @item.purchaser_id = current_user.id
       @item.save
+      binding.pry
       redirect_to root_path
     else
       render 'index'
