@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
     if @transaction.valid?
       pay_item
       @transaction.save
+      # 商品に購入者の情報を代入
       @item.purchaser_id = current_user.id
       @item.save
       redirect_to root_path

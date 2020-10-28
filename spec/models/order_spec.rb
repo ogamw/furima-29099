@@ -32,6 +32,12 @@ RSpec.describe Order, type: :model do
           expect(@order.errors.full_messages).to include('Postal code is invalid')
         end
 
+        it 'prefecture_idが空では登録できない' do
+          @order.prefecture_id = nil
+          @order.valid?
+          expect(@order.errors.full_messages).to include("Prefecture  can't be blank")
+        end
+
         it 'prefecture_idが1では登録できない' do
           @order.prefecture_id = 1
           @order.valid?
