@@ -16,7 +16,6 @@ class OrdersController < ApplicationController
       @transaction.save
       @item.purchaser_id = current_user.id
       @item.save
-      binding.pry
       redirect_to root_path
     else
       render 'index'
