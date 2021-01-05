@@ -36,14 +36,6 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.search(params[:keyword],item_params)
-    if @items.search(params[:keyword],item_params)
-      search_item
-      # binding.pry
-      @results = @p.result.includes(:item, :user)  # 検索条件にマッチした商品の情報を取得
-    else
-      render :search
-    end
   end
 
   private

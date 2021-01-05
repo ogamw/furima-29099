@@ -9,14 +9,6 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :order
 
-  def self.search(search)
-    if search != ""
-      Item.where('text LIKE(?)', "%#{search}%")
-    else
-      Item.all
-    end
-  end
-
   with_options presence: true do
     validates :image, :item_name, :text, :category, :condition, :postage, :shipping_area, :days_to_ship, :price
   end
