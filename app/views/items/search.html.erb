@@ -22,12 +22,34 @@
   <h1>
   詳細検索
 </h1>
-<%= search_form_for @p, url: items_search_path do |f| %>
-  <%= f.label :name_eq, '商品名' %>
-  <%= f.collection_select :item_name_eq, @items, :item_name, :item_name,  include_blank: '指定なし' %>
-  <br>
-  <%= f.submit '検索' %>
-<% end %>
+    <%= search_form_for @q do |f| %>
+      <div class="search-form">
+        <%= f.label :item_name_cont, '商品名' %>
+        <%= f.search_field :item_name_cont, placeholder: "何かお探しですか？", class: "input-box" %>
+      </div>
+
+      <%= f.label :text_count, 'キーワード' %>
+      <%= f.search_field :text_cont, placeholder: "キーワードを入力してください", class: "input-box" %>
+
+      <%= f.label :category_id_eq, 'カテゴリーから探す' %>
+      <%= f.collection_select :category_id_eq, Category.all, :id, :name %>
+
+      <%= f.label :condition_id_eq, '商品の状態から探す' %>
+      <%= f.collection_select :condition_id_eq, Condition.all, :id, :name %>
+    <br>
+      <%= f.label :postage_id_eq, '配送料の負担' %>
+      <%= f.collection_select :postage_id_eq, Postage.all, :id, :name %>
+
+      <%= f.label :shipping_area_id_eq, '発送元地域' %>
+      <%= f.collection_select :shipping_area_id_eq, ShippingArea.all, :id, :name %>
+
+      <%= f.label :days_to_ship_id_eq, '発送までの期間' %>
+      <%= f.collection_select :days_to_ship_id_eq, DaysToShip.all, :id, :name %>
+
+      <div class='sarch-button'>
+        <%= f.submit "search", image_tag: "search.png", class: "search-icon" %>
+      </div>
+    <% end %>
 
   <%# 商品一覧 %>
   <div class='item-contents'>

@@ -2,10 +2,28 @@
 <header class='top-page-header'>
   <div class='search-bar-contents'>
     <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <%= form_with(url: search_item_path, local: true, method: :get, class: "search-form") do |form| %>
-      <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "input-box" %>
+
+    <%= search_form_for @q do |f| %>
+      <div class="search-form">
+        <%= f.search_field :item_name_cont, placeholder: "何かお探しですか？", class: "input-box" %>
+      </div>
+      <%= f.label :category_id_eq, 'カテゴリーから探す' %>
+      <%= f.collection_select :category_id_eq, Category.all, :id, :name %>
+
+      <%= f.label :condition_id_eq, '商品の状態から探す' %>
+      <%= f.collection_select :condition_id_eq, Condition.all, :id, :name %>
+    <br>
+      <%= f.label :postage_id_eq, '配送料の負担' %>
+      <%= f.collection_select :postage_id_eq, Postage.all, :id, :name %>
+
+      <%= f.label :shipping_area_id_eq, '発送元地域' %>
+      <%= f.collection_select :shipping_area_id_eq, ShippingArea.all, :id, :name %>
+
+      <%= f.label :days_to_ship_id_eq, '発送までの期間' %>
+      <%= f.collection_select :days_to_ship_id_eq, DaysToShip.all, :id, :name %>
+
       <div class='sarch-button'>
-        <%= form.submit "検索", image_tag: "search.png", class: "search-icon" %>
+        <%= f.submit "search", image_tag: "search.png", class: "search-icon" %>
       </div>
     <% end %>
   </div>

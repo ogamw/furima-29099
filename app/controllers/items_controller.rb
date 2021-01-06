@@ -1,8 +1,11 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_item, only: [:destroy, :edit, :update, :show]
+  # before_action :search_item, only: [:index]
   def index
     @items = Item.all.order('created_at ASC')
+    @q = Item.ransack(params[:q])
+    @items = @q.result(distinct: true)
   end
 
   def new
@@ -59,7 +62,12 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def search_item
-    @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
-  end
+#   def search_item
+#     @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
+#     @category = Category.where.not(id: 1)  # この記述でid: 1を持ってるやつ以外を指定
+#     @condition = Condition.where.not(id: 1)
+#     @postage = Postage.where.not(id: 1)
+#     @shipping_area = ShippingArea.where.not(id: 1)
+#     @days_to_ship = DaysToShip.where.not(id: 1)
+#   end
 end
