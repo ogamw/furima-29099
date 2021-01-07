@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 ## items テーブル
 
@@ -61,6 +61,8 @@ Things you may want to cover:
 
 - has_one :orders
 - belongs_to :user
+- has_many :tag_items
+- has_many :tags, through: tag_items
 
 ## orders テーブル
 
@@ -80,7 +82,7 @@ Things you may want to cover:
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | postal_code     | string     | null: false                    |
-| prefecture_id  | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | municipality    | string     | null: false                    |
 | address         | string     | null: false                    |
 | building_name   | string     |                                |
@@ -90,3 +92,26 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :order
+
+## tags テーブル
+
+| Column     | Type   | Options     |
+| ---------- | ------ | ----------- |
+| tag_name   | string | null: false |
+
+### Association
+
+- has_many :tag_items
+- has_many :items, through: tag_items
+
+## tag_items テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| tag    | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :tag
+- belongs_to :item
