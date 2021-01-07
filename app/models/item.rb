@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_one :order
+  has_many :tag_items
+  has_many :tags, through: :tag_items
 
   with_options presence: true do
     validates :image, :item_name, :text, :category, :condition, :postage, :shipping_area, :days_to_ship, :price
