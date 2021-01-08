@@ -9,11 +9,11 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = ItemsTag.new
   end
 
   def create
-    @item = Item.new(items_params)
+    @item = ItemsTag.new(items_params)
     if @item.save
       redirect_to root_path
     else
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.require(:item).permit(
+    params.require(:tags_item).permit(
       :item_name,
       :image,
       :text,
@@ -53,7 +53,8 @@ class ItemsController < ApplicationController
       :postage_id,
       :shipping_area_id,
       :days_to_ship_id,
-      :price
+      :price,
+      :tag_name
     )
           .merge(user_id: current_user.id)
   end
