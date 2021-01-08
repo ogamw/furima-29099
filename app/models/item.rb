@@ -11,11 +11,4 @@ class Item < ApplicationRecord
   has_many :tag_items
   has_many :tags, through: :tag_items
 
-  with_options presence: true do
-    validates :image, :item_name, :text, :category, :condition, :postage, :shipping_area, :days_to_ship, :price
-  end
-  with_options numericality: { other_than: 1, message: 'Select' } do
-    validates :category_id, :condition_id, :postage_id, :shipping_area_id, :days_to_ship_id
-  end
-  validates :price, numericality: { greater_than: 299, less_than: 10_000_000, message: 'Out of setting range' }
 end
