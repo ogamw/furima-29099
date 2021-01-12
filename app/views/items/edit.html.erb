@@ -7,9 +7,9 @@ app/assets/stylesheets/items/new.css %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with(model: @item, local: true) do |f| %>
+    <%= form_with url: edit_item_path, local: true do |f| %>
 
-    <%= render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: @tags_item %>
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -116,6 +116,13 @@ app/assets/stylesheets/items/new.css %>
       </div>
     </div>
     <%# /販売価格 %>
+
+        <%# /タグ %>
+    <div class="tag-field", id='tag-field'>
+      <%= f.label :tag_name, "タグ" %>
+      <%= f.text_field :tag_name, class:"input-tag" %>
+    </div>
+    <%# /タグ %>
 
     <%# 注意書き %>
     <div class="caution">

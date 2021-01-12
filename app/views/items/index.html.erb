@@ -128,9 +128,9 @@
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <li class='list'>
-        <% if @items != nil %>
-          <% @items.each do |item| %>
-            <%= link_to '詳細', item_path(item.id), method: :get %>
+        <% if @tags_items != nil %>
+          <% @tags_items.each do |item| %>
+            <%= link_to  item_path(item.id), method: :get do %>
               <div class='item-img-content'>
                 <%= image_tag item.image.variant(resize: '250x250') %>
                 <%# 商品が売れていればsold outを表示しましょう %>
@@ -154,9 +154,16 @@
                       <%= item.condition %>
                     </span>
                   </div>
+                  <ul class="tag">
+                    <li class="tag-list">
+                      <% item.tags.each do |tag| %>
+                        #<%= tag.tag_name %>
+                      <%end%>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            <%# end %>
+            <% end %>
           <% end %>
         <% end %>
       </li>
@@ -165,7 +172,7 @@
       <%# 商品がない場合のダミー %>
       <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
-        <% if @items == nil %>
+        <% if @tags_items == nil %>
           <%= link_to '詳細', item_path(item.id), method: :get %>
             <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
             <div class='item-info'>
@@ -189,10 +196,12 @@
   </div>
   <%# /商品一覧 %>
 </div>
-<div class='purchase-btn'>
-  <span class='purchase-btn-text'>出品する</span>
-  <a href="#">
-    <%= link_to image_tag('camera.png', size: '185x50', class: "purchase-btn-icon"),new_item_path %>
-  </a>
-</div>
+<%= link_to new_item_path do %>
+  <div class='purchase-btn'>
+    <span class='purchase-btn-text'>出品する</span>
+    <a href="#">
+      <%= link_to image_tag('camera.png', size: '185x50', class: "purchase-btn-icon"),new_item_path %>
+    </a>
+  </div>
+<% end %>
 <%= render "shared/footer" %>

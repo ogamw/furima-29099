@@ -1,20 +1,20 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_item, only: [:destroy, :edit, :update, :show]
-  # before_action :search_item, only: [:index]
+  before_action :search_item, only: [:index, :destroy, :edit, :show, :search]
   def index
-    @items = Item.all.order('created_at ASC')
-    @q = Item.ransack(params[:q])
-    @items = @q.result(distinct: true)
+    @tags_items = Item.all.order('created_at ASC')
+    @tags_items  = @q.result(distinct: true)
   end
 
   def new
-    @item = ItemsTag.new
+    @item = TagsItem.new
   end
 
   def create
-    @item = ItemsTag.new(items_params)
-    if @item.save
+    @item = TagsItem.new(items_params)
+    if @item.valid?
+      @item.save
       redirect_to root_path
     else
       render :new
@@ -22,23 +22,36 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @tags_item = TagItem.new
     if current_user.id == @item.user_id
       @item.destroy
       redirect_to root_path
+        #Mysql2::Error: 
     else
       render :show
     end
   end
 
+  def edit
+   @tags_item = TagItem.new
+  end
+
   def update
-    if @item.update(items_params)
+    @tags_item = TagItem.new
+    if @tags_item.update(items_params)
       redirect_to root_path
+      #ルーティングエラー
     else
       render :edit
     end
   end
 
   def search
+    @tags_items = @q.result(distinct: true)
+  end
+
+  def  show
+    @tags_item = TagItem.find(params[:id])
   end
 
   private
@@ -61,14 +74,15 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+    @tag = Tag.find(params[:id])
   end
 
-#   def search_item
-#     @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
-#     @category = Category.where.not(id: 1)  # この記述でid: 1を持ってるやつ以外を指定
-#     @condition = Condition.where.not(id: 1)
-#     @postage = Postage.where.not(id: 1)
-#     @shipping_area = ShippingArea.where.not(id: 1)
-#     @days_to_ship = DaysToShip.where.not(id: 1)
-#   end
+  def search_item
+    @q = Item.ransack(params[:q])  # 検索オブジェクトを生成
+    @category = Category.where.not(id: 1)  # この記述でid: 1を持ってるやつ以外を指定
+    @condition = Condition.where.not(id: 1)
+    @postage = Postage.where.not(id: 1)
+    @shipping_area = ShippingArea.where.not(id: 1)
+    @days_to_ship = DaysToShip.where.not(id: 1)
+  end
 end

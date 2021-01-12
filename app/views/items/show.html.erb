@@ -4,10 +4,10 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= @item.item_name %>
+      <%= @tags_item.item.item_name %>
     </h2>
     <div class='item-img-content'>
-      <%= image_tag @item.image,class:"item-box-img" %>
+      <%= image_tag @tags_item.item.image,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <% if @item.purchaser_id.nil? %>
       <% else %>
@@ -18,7 +18,7 @@
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
-      <span class="item-price">¥<%= @item.price %></span>
+      <span class="item-price">¥<%= @tags_item.item.price %></span>
       <span class="item-postage">
         (税込) 送料込み
       </span>
@@ -29,7 +29,7 @@
     <% if user_signed_in? && current_user.id == @item.user_id %>
       <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
-      <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
+      <%= link_to '削除', item_path(@tags_item.id), method: :delete, class:'item-destroy' %>
     <% end %>
 
     <%# 商品が売れていない場合はこちらを表示しましょう %>
@@ -70,6 +70,13 @@
           <th class="detail-item">発送日の目安</th>
           <td class="detail-value"><%= @item.days_to_ship.name %></td>
         </tr>
+        <ul class="tag">
+          <li class="tag-list">
+            <% @item.tags.each do |tag| %>
+              #<%= tag.tag_name %>
+            <%end%>
+          </li>
+        </ul>
       </tbody>
     </table>
     <div class="option">
