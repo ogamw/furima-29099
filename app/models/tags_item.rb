@@ -26,7 +26,7 @@ class TagsItem
     tag = Tag.where(tag_name: tag_name).first_or_initialize
     tag.save
 
-    TagItem.create(item_id: item.id, tag_id: tag.id)
+    TagItem.create(item_id: item.id, tag_id: tag.id)  #  TagItem と TagsItem は別なので注意
   end
 
 end

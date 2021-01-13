@@ -151,16 +151,9 @@
                   <div class='star-btn'>
                     <%= image_tag "star.png", class:"star-icon" %>
                     <span class='star-count'>
-                      <%= item.condition %>
+                      <%= 7 - item.condition_id %>
                     </span>
                   </div>
-                  <ul class="tag">
-                    <li class="tag-list">
-                      <% item.tags.each do |tag| %>
-                        #<%= tag.tag_name %>
-                      <%end%>
-                    </li>
-                  </ul>
                 </div>
               </div>
             <% end %>

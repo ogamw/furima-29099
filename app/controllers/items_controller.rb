@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_item, only: [:destroy, :edit, :update, :show]
-  before_action :search_item, only: [:index, :destroy, :edit, :show, :search]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
+  before_action :search_item, only: [:index, :show, :destroy, :edit, :search]
   def index
     @tags_items = Item.all.order('created_at ASC')
     @tags_items  = @q.result(distinct: true)
@@ -21,12 +21,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def  show
+    @tags_item = TagItem.find(params[:id])
+  end
+
   def destroy
-    @tags_item = TagItem.new
     if current_user.id == @item.user_id
       @item.destroy
       redirect_to root_path
-        #Mysql2::Error: 
     else
       render :show
     end
@@ -48,10 +50,6 @@ class ItemsController < ApplicationController
 
   def search
     @tags_items = @q.result(distinct: true)
-  end
-
-  def  show
-    @tags_item = TagItem.find(params[:id])
   end
 
   private

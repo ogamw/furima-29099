@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_one :order
-  has_many :tag_items
+  has_many :tag_items, foreign_key: :item_id, dependent: :destroy
   has_many :tags, through: :tag_items
 
 end
