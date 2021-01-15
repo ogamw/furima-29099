@@ -3,8 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :search_item, only: [:index, :show, :destroy, :edit, :search]
   def index
-    @tags_items = Item.all.order('created_at ASC')
-    @tags_items  = @q.result(distinct: true)
+    @items = Item.all.order('created_at ASC')
+    @items  = @q.result(distinct: true)
   end
 
   def new
@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def  show
-    @tags_item = TagItem.find(params[:id])
+    @tag_item = TagItem.find(params[:id])
   end
 
   def destroy
@@ -35,18 +35,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
-   @tags_item = TagItem.new
-  end
-
-  def update
-    @tags_item = TagItem.new
-    if @tags_item.update(items_params)
-      redirect_to root_path
-      #ルーティングエラー
-    else
-      render :edit
-    end
-  end
+    @item = TagsItem.new
+   end
+ 
+   def update
+    @item = TagsItem.new(items_params)
+     if @item.valid?
+       @item.save
+       redirect_to root_path
+     else
+       render :edit
+     end
+   end
 
   def search
     @tags_items = @q.result(distinct: true)
@@ -72,7 +72,6 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-    @tag = Tag.find(params[:id])
   end
 
   def search_item
