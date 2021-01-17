@@ -35,7 +35,7 @@ class TagsItem
     ActiveRecord::Base.transaction do
       # mapメソッドを使いsplit_tag_namesをtagの情報に変換
       tags = split_tag_names.map { |tag_name| Tag.find_or_create_by!(tag_name: tag_name) }
-      item.update!(image: image, item_name: item_name, text: text, price: price, category_id: category_id, condition_id: condition_id, postage_id: postage_id, shipping_area_id: shipping_area_id, days_to_ship_id: days_to_ship_id, user_id: user_id)
+      item.update!(image: image, item_name: item_name, text: text, price: price, category_id: category_id, condition_id: condition_id, postage_id: postage_id, shipping_area_id: shipping_area_id, days_to_ship_id: days_to_ship_id, user_id: user_id, tags: tags)
     end
   rescue ActiveRecord::RecordInvalid
     false
