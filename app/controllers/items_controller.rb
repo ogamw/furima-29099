@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_item, only: [:show, :destroy, :edit, :update]
+  before_action :set_item, only: [:show, :destroy]
   before_action :search_item, only: [:index, :show, :destroy, :edit, :search]
   def index
     @items = Item.all.order('created_at ASC')
@@ -8,13 +8,13 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = TagsItem.new
+    @tags_item = TagsItem.new
   end
 
   def create
-    @item = TagsItem.new(items_params)
-    if @item.valid?
-      @item.save
+    @tags_item = TagsItem.new(items_params)
+    if @tags_item.valid?
+      @tags_item.save
       redirect_to root_path
     else
       render :new
@@ -35,13 +35,17 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = TagsItem.new
+    @item = current_user.items.find(params[:id])
+
+    @tegs_item = TagsItem.new(item: @item)
    end
  
    def update
-    @item = TagsItem.new(items_params)
-     if @item.valid?
-       @item.save
+    @item = current_user.items.find(params[:id])
+
+    @tags_item = TagsItem.new(update_items_params, item: @item)
+     if @tags_item.valid?
+       @tags_item.save
        redirect_to root_path
      else
        render :edit
@@ -55,7 +59,23 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.require(:tags_item).permit(
+    params.permit(
+      :item_name,
+      :image,
+      :text,
+      :category_id,
+      :condition_id,
+      :postage_id,
+      :shipping_area_id,
+      :days_to_ship_id,
+      :price,
+      :tag_name
+    )
+          .merge(user_id: current_user.id)
+  end
+
+  def update_items_params
+    params.require(:item).permit(
       :item_name,
       :image,
       :text,
