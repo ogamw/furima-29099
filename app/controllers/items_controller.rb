@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def  show
-    @tag_item = TagItem.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def destroy
