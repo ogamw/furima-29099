@@ -23,6 +23,7 @@ class TagsItem
   # itemがすでに保存されているものか、新規のものかで、PUTとPATCHを分ける
   delegate :persisted?, to: :item
 
+  # initializeでFormオブジェクトの値を初期化し、更新の際はdefault_attributesを呼び出す設定
   def initialize(attributes = nil, item: Item.new)
     @item = item
     attributes ||= default_attributes
@@ -40,14 +41,6 @@ class TagsItem
   rescue ActiveRecord::RecordInvalid
     false
   end
-
-  # def save
-  #   item = Item.create(image: image, item_name: item_name, text: text, price: price, category_id: category_id, condition_id: condition_id, postage_id: postage_id, shipping_area_id: shipping_area_id, days_to_ship_id: days_to_ship_id, user_id: user_id)
-  #   tag = Tag.where(tag_name: tag_name).first_or_initialize  #  itemがすでに保存されているものか、新規のものかで、PUTとPATCHを分けている?
-  #   tag.save
-
-  #   TagItem.create(item_id: item.id, tag_id: tag.id)  #  TagItem と TagsItem は別なので注意
-  # end
 
   #  formを飛ばす場所を（#createか#updateか）を判別して、切り替えている
   def to_model

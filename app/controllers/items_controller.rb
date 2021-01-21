@@ -56,6 +56,12 @@ class ItemsController < ApplicationController
     @tags_items = @q.result(distinct: true)
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
   private
 
   def items_params
